@@ -1,0 +1,77 @@
+# -*- coding: utf-8 -*-
+"""
+Austin Rosen 
+miRNA Counter
+
+This module prompts the user to input the name of a fastq file, a fasta file, and an output file.
+The function miRNAcounter then reads in the sequences contained in the fastq file, and compares
+them to the miRNA sequences contained in the fasta file. The function then writes to a file the 
+name of each miRNA and the number of times it appeared in the sequencing library.
+"""
+
+#############################################################################
+
+def main():
+    
+    # prompt user for file names
+    
+    fastq = input('Enter the name of the fastq file, including file extension:\n')
+    fasta = input('Enter the name of the fasta file, including file extension:\n')
+    outfile = input('Enter the name of the output file, including file extension:\n')
+    
+    # call function and print results to user, but tell user if files fail to open
+    value = miRNAcounter(fastq, fasta, outfile)
+    if value == -1:
+        print('\nError opening one or more files')
+    else:
+        print(f'\n{value} total miRNA reads identified')
+    
+  
+#############################################################################
+    
+def miRNAcounter(fastq, fasta, outfile):
+    
+    # try opening files, and return a value of -1 if there is an error 
+    try:
+        fq_handle = open(fastq)
+        fa_handle = open(fasta)
+        out_handle = open(outfile, 'w')
+    except:
+        return -1
+    
+    # initialize variables and dictionaries
+    line_number = 1
+    reads = 0
+    seq = {}
+    mi_rna = {}
+    
+    
+    with fq_handle, fa_handle, out_handle:
+        
+        # read in sequences from fastq file
+        for line in fq_handle:
+            if (line_number + 4) % 4 == 2:
+                seq[line.rstrip()] = seq.get(line.rstrip(), 0) + 1
+            line_number += 1
+        
+        # compare miRNA sequences to fastq sequences and count how many times it appears in the library
+        for line in fa_handle:
+            if line[0] == '>':
+                name = line[5:-1]
+            elif line.rstrip() in seq:
+                mi_rna[name] = seq[line.rstrip()]
+                reads += seq[line.rstrip()]
+            elif line.rstrip() not in seq:
+                mi_rna[name] = 0
+       
+        # write results to new file in tab delimited format 
+        for seq in mi_rna:
+            out_handle.write(f'{seq}\t{mi_rna[seq]}\n')
+                
+    return reads
+    
+
+#################################################################################
+
+if __name__ == '__main__':
+    main()
