@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-Created on Mon Oct 10 09:08:50 2022
-
-@author: austi
+Austin Rosen
+Fibonacci Sequence Evaluator
 """
 
 ######################################
