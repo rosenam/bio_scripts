@@ -7,13 +7,13 @@ Rosalind Overlap Graphs Exercise
 
 ##########################################
 def main():
-    
-    '''
-    
+
+    """
+
     This function takes a collection of DNA strings in FASTA format having total length at most 10 kbp,
-    and returns the adjacency list corresponding to O3. 
-    
-    '''
+    and returns the adjacency list corresponding to O3.
+
+    """
     
     # open file
     try:
