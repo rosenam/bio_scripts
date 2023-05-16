@@ -1,5 +1,7 @@
 """
 Austin Rosen
+
+Matching Random Motifs - Rosalind
 """
 
 def main():

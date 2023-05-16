@@ -7,12 +7,14 @@ import math
 
 def main():
 
-    n = 5
+    n = 4
+
     nums = []
     total = 1
     for i in range(1,n+1):
         total = total * i
         nums.append(i)
+
 
     print(total)
 
@@ -30,6 +32,7 @@ def permute(nums, x, n):
 
     else:
         for i in range(x,n):
+            print(i)
             nums[x], nums[i] = nums[i], nums[x]
             permute(nums, x+1 ,n)
             nums[x], nums[i] = nums[i], nums[x]
