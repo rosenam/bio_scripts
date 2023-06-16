@@ -6,19 +6,21 @@ Matching Random Motifs - Rosalind
 
 def main():
 
-    rdm_strings = 90000
-    gc_cont = 0.6
-    motif = 'ATAGCCGA'
+    rdm_strings = 80160
+    gc = 0.419381
+    motif = 'CACTGATAG'
     prob = 1
 
 
     for nt in motif:
-        if nt == 'A' or nt == 'T':
-            prob = prob*(1-gc_cont/2)
-        elif nt == 'C' or nt == 'G':
-            prob = prob*gc_cont/2
+        if nt == 'C' or nt == 'G':
+            prob = prob*gc/2
+        else:
+            prob = prob*((1-gc)/2)
 
+    f_prob = 1 - prob
 
+    print(1 - (f_prob ** rdm_strings))
 
 if __name__ == '__main__':
 
