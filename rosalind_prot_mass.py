@@ -12,7 +12,7 @@ def main():
     table_handle = open('aa_temps.txt')
     in_handle = open('rosalind_prmt.txt')
 
-    # initialize dictionary object for amino acid temp table
+    # initialize dictionary object for amino acid mass table
     temp_dict = {}
 
     # build amino acid temp dictionary from Rosalind table
