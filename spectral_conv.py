@@ -18,9 +18,11 @@ def main():
         for line in in_handle:
             spectra.append(line.split())
 
+    # make a list for each spectra
     spec_1 = spectra[0]
     spec_2 = spectra[1]
 
+    # substract one sprecta from the other and record values in a dictionary
     for i in spec_1:
         for j in spec_2:
             ans = round(float(i) - float(j),5)
@@ -31,6 +33,7 @@ def main():
             results.append(ans)
 
 
+    # find maximum dictionary value, and print key and value
     M = max(final.values())
     print(M)
     k_lst = list(final.keys())

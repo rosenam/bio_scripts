@@ -9,19 +9,18 @@ def main():
 
     l = 0
     nums = []
-    diff = []
     mass_dict = {}
     in_handle = open('full_spec.txt')
     table_handle = open('aa_mass.txt')
     results = []
-    k = 0
-    pep = ''
 
+    # read in amino acid mass table
     with table_handle:
         for line in table_handle:
             chunks = line.split()
-            mass_dict[round(float(chunks[1]), 5)] = chunks[0]
+            mass_dict[round(float(chunks[1]), 4)] = chunks[0]
 
+    # read in mass data from partial digest
     for line in in_handle:
         if l == 0:
             full_mass = round(float(line),5)
@@ -29,34 +28,31 @@ def main():
             nums.append(round(float(line),5))
         l += 1
 
+    ### find inner t string from given data
+
+    # initialize variables
     n = int(((l-3)/2))
-    print(n)
-    print(nums)
-    print(mass_dict)
+    tmp = nums[0]
 
-
-    for i in nums:
-        tmp = nums.copy()
-        tmp.remove(i)
-        print(tmp)
-        for j in tmp:
-            x = round(abs(i-j),5)
-            if x in mass_dict.keys():
-                results.append(x)
+    # iterate through loop n times to find n amino acids
+    for i in range(1,n+1):
+        nums.remove(tmp)
+        for j in nums:
+            mass = round(j - tmp, 4)
+            if mass in mass_dict.keys():
+                aa = mass_dict.get(mass)
+                results.append(aa)
+                tmp = j
                 break
+        i += 1
 
-    print(results)
+    # print results to user
 
-    final = results[:n]
+    final = ''
+    for i in results:
+        final += i
 
-    v_lst = list(mass_dict.values())
-    k_lst = list(mass_dict.keys())
-    for i in final:
-        idx = k_lst.index(i)
-        prt = v_lst[idx]
-        pep += prt
-
-    print(pep)
+    print(final)
 
 if __name__ == "__main__":
 
