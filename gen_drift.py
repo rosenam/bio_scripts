@@ -14,10 +14,12 @@ def main():
     k = 1
 
     p = m/(2*n)
+    ans = 1
 
-    q2 = (1-p)**2
-    tpq = 2 * math.sqrt(q2) * (1 - math.sqrt(q2))
-    ans = round(q2 + tpq, 3)
+    for i in range(2*n, 2*n-k-1, -1):
+
+        ans -= p**i
+        ans = round(ans, 3)
 
 
     prob = (math.factorial(2*n)/math.factorial(k)/math.factorial(2*n-k))*(p**k)*(1-p)**(2*n-k)

@@ -12,9 +12,9 @@ def main():
     seqs = []
     for line in in_handle:
         seqs.append(line.strip())
-    results = str(seqs[0])
 
     # use first seq as starting point of sequence, and build on that using all other sequences
+    results = str(seqs[0])
     tmp = seqs.copy()
     tmp.pop(0)
 
