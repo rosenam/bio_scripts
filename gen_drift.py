@@ -3,6 +3,7 @@ Austin Rosen
 
 The Wright-Fisher Model of Genetic Drift -- Rosalind Exercise
 
+v2: Here are some changes
 """
 
 import math
